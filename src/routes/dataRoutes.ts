@@ -18,13 +18,13 @@ router.post('/save', async (req, res) => {
   }
 });
 
-router.post('/test', async (req, res) => {
+router.post('/saveOnMongo', async (req, res) => {
   try {
-    const data = new dataModel()
-    await data.testConnection();
-    res.status(200).json({ message: 'Success' });
+    const dataModel = new DataModel()
+    const resultado = await dataModel.saveDataOnMongo(req.body);
+    res.status(200).json({ message: 'success', response: resultado});
   } catch (error) {
-    res.status(500).json({ error: 'Failed to connect' });
+    res.status(500).json({ error: 'Failed to save data on Mongo' });
   }
 });
 
